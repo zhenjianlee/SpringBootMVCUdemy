@@ -26,13 +26,12 @@ public class Controller {
         this.anotherOrderService=anotherorderService;
     }
 
-
     @GetMapping("/order")
     public Order getAnOrder(){
         return orderService.getOneOrder();
     }
 
-    @GetMapping("/orders")
+    @GetMapping("/orders/{num}")
     public List<Order> getManyOrders(@PathVariable int num){
         return orderService.generateTheOrders(num);
     }

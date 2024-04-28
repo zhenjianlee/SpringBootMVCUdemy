@@ -28,8 +28,19 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+<!--		STEP1:	This is to exclude tomcat as default server-->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-
+<!--		STEP2: THis is to add Jetty as server-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -48,8 +59,6 @@
 <!--			<artifactId>spring-security-test</artifactId>-->
 <!--			<scope>test</scope>-->
 <!--		</dependency>-->
-
-
 	</dependencies>
 
 	<build>
