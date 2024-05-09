@@ -46,8 +46,12 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
 
     @Transactional
-    public void updateEmployee(Employee employee){
-        entityManager.merge(employee);
+    public void updateEmployee(int id,Employee employee){
+        Employee foundEmployee = getEmployee(id);
+        foundEmployee.setFirstName(employee.getFirstName());
+        foundEmployee.setLastName(employee.getLastName());
+        foundEmployee.setEmail(employee.getEmail());
+        entityManager.merge(foundEmployee);
     }
 
     @Transactional
@@ -56,6 +60,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         entityManager.remove(employeeToDelete);
     }
 
+    @Transactional
     public int deleteAllEmployees(){
         int rowsDeleted = entityManager.createQuery("DELETE FROM Employee").executeUpdate();
         return rowsDeleted;
