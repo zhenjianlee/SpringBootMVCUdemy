@@ -3,6 +3,7 @@ package com.dev.realtimeproject.controller;
 import com.dev.realtimeproject.dao.EmployeeDAO;
 import com.dev.realtimeproject.dto.EmployeeDTO;
 import com.dev.realtimeproject.entity.Employee;
+import com.dev.realtimeproject.exception.EmployeeNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +25,11 @@ public class EmployeeController {
 
     @GetMapping("{id}")
     public Employee getEmployee(@PathVariable int id){
-            return employeeDAO.getEmployee(id);
+        Employee foundEmployee = employeeDAO.getEmployee(id);
+        if (foundEmployee==null){
+            throw new EmployeeNotFoundException("Cannot find Employee "+id);
+        }
+        return foundEmployee;
     }
 
     @GetMapping("getLastName/{lastName}")

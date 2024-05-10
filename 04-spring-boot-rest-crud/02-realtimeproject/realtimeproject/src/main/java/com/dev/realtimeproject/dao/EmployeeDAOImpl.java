@@ -1,6 +1,7 @@
 package com.dev.realtimeproject.dao;
 
 import com.dev.realtimeproject.entity.Employee;
+import com.dev.realtimeproject.exception.EmployeeNotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
@@ -48,6 +49,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Transactional
     public void updateEmployee(int id,Employee employee){
         Employee foundEmployee = getEmployee(id);
+        if (foundEmployee == null){
+            throw new EmployeeNotFoundException("Cannot find the employee with ID="+id);
+        }
         foundEmployee.setFirstName(employee.getFirstName());
         foundEmployee.setLastName(employee.getLastName());
         foundEmployee.setEmail(employee.getEmail());
